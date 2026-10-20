@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eye-tracking-mouse-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eye-tracking-mouse-test
+  template:
+    metadata:
+      labels:
+        app: eye-tracking-mouse-test
+    spec:
+      containers:
+        - name: eye-tracking-mouse
+          image: 772607727551.dkr.ecr.ap-south-1.amazonaws.com/eye-tracking-mouse-cca02:latest
+          imagePullPolicy: IfNotPresent
+          command: ["python", "-c"]
+          args:
+            - "import cv2, mediapipe, numpy; print('Eye Tracking Mouse dependencies are working'); import time; time.sleep(3600)"
